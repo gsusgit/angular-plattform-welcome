@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -40,13 +40,17 @@ export class LoginComponent implements OnInit {
     {
       const userName = this.userForm.value.username;
       const password = this.userForm.value.password;
-      this.http.get(`${this.API_URL}/${userName}`).subscribe((data: any) => {
-        if(!data.length) {
+      const body = {
+        username: userName,
+        password: password
+      };
+      this.http.post(`${this.API_URL}`, body).subscribe((data: any) => {
+        if(!data) {
           this.userExists = false;
         } else {
           this.userExists = true;
           this.router.navigate(['/list/']);
-          this.cookieService.set('_g.e.username', encodeURIComponent(data[0].username));
+          this.cookieService.set('_g.e.username', encodeURIComponent(data.username));
         }
       })
     }
