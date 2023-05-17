@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -49,7 +49,10 @@ export class LoginComponent implements OnInit {
           this.userExists = false;
         } else {
           this.userExists = true;
-          this.router.navigate(['/list/']);
+          const navigationExtras: NavigationExtras = {
+            state: data
+          };
+          this.router.navigate(['list'], navigationExtras);
           this.cookieService.set('_g.e.username', encodeURIComponent(data.username));
         }
       })

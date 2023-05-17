@@ -9,8 +9,14 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ListComponent implements OnInit {
 
+  userData: any;
+
   constructor(private router: Router,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService) {
+    const navigation = this.router.getCurrentNavigation();
+    // @ts-ignore
+    this.userData = navigation.extras.state;
+  }
 
   ngOnInit(): void {
   }
