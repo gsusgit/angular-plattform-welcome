@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { UserModel } from '../../shared/store/user.model';
+import { AppState } from '../../app.reducer';
+import { Store } from '@ngrx/store';
+import { SetUserAction } from '../../shared/store/user.actions';
+import { PersistUserService } from '../../services/persist.user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +26,9 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
               private router: Router,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService,
+              private userStore: Store<AppState>,
+              private persistUserService: PersistUserService) { }
 
   ngOnInit(): void {
   }
@@ -49,14 +56,23 @@ export class LoginComponent implements OnInit {
           this.userExists = false;
         } else {
           this.userExists = true;
-          const navigationExtras: NavigationExtras = {
-            state: data
-          };
-          this.router.navigate(['list'], navigationExtras);
+          this.storeUser(data);
           this.cookieService.set('_g.e.username', encodeURIComponent(data.username));
+          this.router.navigate(['list']);
         }
       })
     }
   }
 
+  private storeUser(data: any) {
+    const userObject = new UserModel({
+      email: data.email,
+      apps: data.apps,
+      name: data.name,
+      lastname: data.lastname,
+      username: data.username
+    });
+    this.userStore.dispatch(new SetUserAction(userObject));
+    this.persistUserService.persistData(userObject);
+  }
 }
