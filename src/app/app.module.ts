@@ -10,12 +10,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NavbarComponent } from './shared/ui/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ListComponent
+    ListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

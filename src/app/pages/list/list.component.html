@@ -1,31 +1,22 @@
-<div id="list">
-  <div class="container">
-    <h3 class="pt-5 pb-5">Welcome {{userObject.name}}, select one App in the Apps list</h3>
-    <div class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Users App</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet.</p>
-              <a href="http://localhost:4201" class="btn btn-primary" target="_blank">Open</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Contracts App</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet.</p>
-              <a href="http://localhost:4201" class="btn btn-primary" target="_blank">Open</a>
-            </div>
-          </div>
+<app-navbar></app-navbar>
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Users App</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet.</p>
+          <a href="http://localhost:4201" class="btn btn-primary" target="_blank">Open</a>
         </div>
       </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 mt-5">
-        <button type="button" class="btn btn-danger" (click)="logOut()">Log out</button>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Contracts App</h5>
+          <p class="card-text">Lorem ipsum dolor sit amet.</p>
+          <a href="http://localhost:4201" class="btn btn-primary" target="_blank">Open</a>
+        </div>
       </div>
     </div>
   </div>
