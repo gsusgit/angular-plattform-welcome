@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserModel } from '../../shared/store/user.model';
 import { AppState } from '../../app.reducer';
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private storeUser(data: any) {
+  storeUser(data: any) {
     const userObject = new UserModel({
       email: data.email,
       apps: data.apps,

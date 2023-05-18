@@ -7,16 +7,11 @@ export class UserModel {
   public apps: number[];
 
   constructor(uo: UserObject) {
-    // @ts-ignore
-    this.email = uo && uo.email || null;
-    // @ts-ignore
-    this.username = uo && uo.username || null;
-    // @ts-ignore
-    this.name = uo && uo.name || null;
-    // @ts-ignore
-    this.lastname = uo && uo.lastname || null;
-    // @ts-ignore
-    this.apps = uo && uo.apps || null;
+    this.email = uo.email;
+    this.username = uo.username;
+    this.name = uo.name;
+    this.lastname = uo.lastname;
+    this.apps = uo.apps;
   }
 
 }

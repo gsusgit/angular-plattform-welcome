@@ -14,15 +14,15 @@ import { filter, Subscription } from 'rxjs';
 })
 export class ListComponent implements OnInit {
 
-  userData: any;
   // @ts-ignore
   userObject: UserModel;
   subscription: Subscription = new Subscription();
 
   constructor(private router: Router,
               private cookieService: CookieService,
-              private store: Store<AppState>,
+              private userStore: Store<AppState>,
               private persistUserService: PersistUserService) {
+    this.persistUserService.loadData();
   }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class ListComponent implements OnInit {
   }
 
   getUserStore() {
-    this.subscription = this.store.select('user_state')
+    this.subscription = this.userStore.select('user_state')
       .pipe(filter(user_state => user_state.user != null))
       .subscribe(user_state => {
         this.userObject =  new UserModel({
